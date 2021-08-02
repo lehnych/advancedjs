@@ -5,3 +5,22 @@
 .cart-bar {
 	right: 0;
 }
+
+.cart-bar__cart-item {
+	margin-bottom: 0;
+}
+
+.cart-bar__cart-item:not(:last-child) {
+	margin-bottom: 20px;
+	padding-bottom: 50px;
+	border-bottom: 1px solid #f4f4f4;
+}
+
+.cart-bar__cart-item__quantity {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cart-bar__cart-item:not(:last-child) .cart-bar__cart-item__price {
+	bottom: 15px;
+}
