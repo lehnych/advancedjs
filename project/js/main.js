@@ -189,7 +189,7 @@ class Cart extends List {
      * добавление товара
      * @param element
      */
-    addCartItem(element) {
+    increaseCartItem(element) {
         this.getJson(`${API}/addToBasket.json`)
             .then(data => {
                 if(data.result === 1) {
@@ -209,7 +209,7 @@ class Cart extends List {
      * удаление товара
      * @param element
      */
-    deleteCartItem(element) {
+    decreaseCartItem(element) {
         this.getJson(`${API}/deleteFromBasket.json`)
             .then(data => {
                 if(data.result === 1) {
@@ -261,13 +261,13 @@ class Cart extends List {
 
         document.querySelector(this.container).addEventListener('click', e => {
             if(e.target.classList.contains('btn--add-cart-item')){
-                this.addCartItem(e.target);
+                this.increaseCartItem(e.target);
             }
         });
 
         document.querySelector(this.container).addEventListener('click', e => {
             if(e.target.classList.contains('btn--delete-cart-item')){
-                this.deleteCartItem(e.target);
+                this.decreaseCartItem(e.target);
             }
         });
 
