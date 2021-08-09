@@ -2,6 +2,21 @@
 
 
 /* Temp CSS */
+
+.search__form .form-group {
+	margin-bottom: 0;
+}
+.search__form .form-group [class^=icon__],
+.search__form .form-group [class*=" icon__"] {
+	color: #222;
+}
+
+@media(max-width:567.98px){
+	header .header__col .basket {
+		display:inherit;
+	}
+}
+
 .cart-bar {
 	right: 0;
 }
