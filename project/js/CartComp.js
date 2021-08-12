@@ -75,10 +75,15 @@ Vue.component('cart', {
             });
     },
     template: `
-            <div class="cart-bar__cart-items">
-                <p v-if="!cartItems.length">Корзина пуста</p>
-                <cart-item v-for="item of cartItems" :key="item.product_id" :cart-item="item" @decreaseCartItem="decreaseCartItem" @increaseCartItem="increaseCartItem" @removeCartItem="removeCartItem"></cart-item>
+        <div id="cart-bar" class="cart-bar">
+            <div class="cart-bar__header" id="cart-bar__header"><span>Cart</span><i class="icon__times"></i></div>
+            <div class="cart-bar__content" id="cart-bar__content">
+                <div class="cart-bar__cart-items">
+                    <p v-if="!cartItems.length">Корзина пуста</p>
+                    <cart-item v-for="item of cartItems" :key="item.product_id" :cart-item="item" @decreaseCartItem="decreaseCartItem" @increaseCartItem="increaseCartItem" @removeCartItem="removeCartItem"></cart-item>
+                </div>
             </div>
+        </div> 
         `
 });
 
@@ -93,13 +98,13 @@ Vue.component('cart-item', {
                 <h5 class="cart-bar__cart-item__title">{{cartItem.product_name}}</h5>
                 <div>Price: <span class="cart-bar__cart-item__single-price">{{cartItem.product_price}}$</span></div>
                 <div class="cart-bar__cart-item__quantity">Quantity:
-                    <i class="icon__minus btn--delete-cart-item" @click="$emit('decreaseCartItem', cartItem)"></i>
+                    <i class="icon__minus icon--btn" @click="$emit('decreaseCartItem', cartItem)"></i>
                     <span class="cart-bar__cart-item__quantity-input">{{cartItem.product_quantity}}</span>
-                    <i class="icon__plus btn--add-cart-item" @click="$emit('increaseCartItem', cartItem)"></i>
+                    <i class="icon__plus icon--btn" @click="$emit('increaseCartItem', cartItem)"></i>
                 </div>
             </div>
             <div class="cart-bar__cart-item__delete">
-                <i class="icon__times btn--remove-cart-item" @click="$emit('removeCartItem', cartItem)"></i>
+                <i class="icon__times icon--btn" @click="$emit('removeCartItem', cartItem)"></i>
             </div>
             <div class="cart-bar__cart-item__price">
                 {{cartItem.product_quantity * cartItem.product_price}}$

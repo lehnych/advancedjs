@@ -2,6 +2,9 @@
 
 
 /* Temp CSS */
+.icon--btn {
+	cursor: pointer;
+}
 
 .search__form .form-group {
 	margin-bottom: 0;
@@ -17,6 +20,27 @@
 	}
 }
 
+/* Alert */
+.alert {
+	margin-bottom: 45px;
+	padding: 15px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+.alert.alert--danger {
+	background: #f16d7f;
+	color: #ffffff;
+}
+.alert.alert--danger p {
+	margin-bottom: 0;
+}
+.alert.alert--danger .icon--btn {
+	margin: -15px -15px -15px 30px;
+	padding: 15px;
+}
+
+/* Cart */
 .cart-bar {
 	right: 0;
 }

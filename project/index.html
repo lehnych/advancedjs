@@ -22,8 +22,10 @@
 							<div class="search">
 								<search ref="search"></search>
 							</div>
-							<div class="basket"><a href="#" title="My Basket">
-								<div class="basket__count">0</div><i class="icon__cart" id="cart-bar__toggle"></i></a>
+							<div class="basket">
+								<a href="#" title="My Basket" @click="showCart = !showCart">
+								<div class="basket__count">0</div><i class="icon__cart" id="cart-bar__toggle"></i>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -33,26 +35,24 @@
 
 		<main>
 			<div class="main__wrapper container">
+
+				<error ref="error"></error>
+
 				<section class="product-grid mode--grid row">
 					<products ref="products"></products>
 				</section>
 			</div>
 		</main>
 
-		<div class="cart-bar" id="cart-bar">
-			<div class="cart-bar__header" id="cart-bar__header"><span>Cart</span><i class="icon__times"></i></div>
-			<div class="cart-bar__content" id="cart-bar__content">
-				<cart ref="cart"></cart>
-			</div>
-		</div>
-
+		<cart ref="cart"></cart>
 
 	</div>
 </div>
 <script src="js/vue.js"></script>
-<script src="js/ProducSearch.js"></script>
 <script src="js/CartComp.js"></script>
 <script src="js/ProducComp.js"></script>
+<script src="js/ProducSearch.js"></script>
+<script src="js/ErrorComp.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
