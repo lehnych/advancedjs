@@ -1,5 +1,5 @@
 {
-  /*"cartTotalPrice": 8100,
+  "cartTotalPrice": 8100,
   "cartTotalItems": 9,
   "contents": [
     {
@@ -16,5 +16,5 @@
       "product_price": 100,
       "product_quantity": 1
     }
-  ]*/
+  ]
 }
