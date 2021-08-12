@@ -1,6 +1,6 @@
 {
-  /*"cartTotalPrice": 8100,
-  "cartTotalItems": 9,
+  "cartTotalPrice": 1100,
+  "cartTotalItems": 2,
   "contents": [
     {
       "product_id": 1,
@@ -16,5 +16,5 @@
       "product_price": 100,
       "product_quantity": 1
     }
-  ]*/
+  ]
 }

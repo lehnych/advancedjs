@@ -3,8 +3,15 @@ Vue.component('cart', {
       return {
           cartUrl: '/getBasket.json',
           cartItems: [],
-          showCart: false
       }
+    },
+    computed: {
+        cartCount() {
+            return this.cartItems.reduce((n, cartItem) => cartItem.product_quantity+ n, 0);
+        },
+        cartTotal() {
+            return this.cartItems.reduce((n, cartItem) => cartItem.product_price * cartItem.product_quantity + n, 0);
+        },
     },
     methods: {
         addProduct(product) {
@@ -63,8 +70,7 @@ Vue.component('cart', {
                         }
                     }
                 })
-        },
-
+        }
     },
     mounted(){
         this.$parent.getJson(`${API + this.cartUrl}`)
@@ -75,18 +81,18 @@ Vue.component('cart', {
             });
     },
     template: `
-        <div id="cart-bar" class="cart-bar">
-            <div class="cart-bar__header" id="cart-bar__header"><span>Cart</span><i class="icon__times"></i></div>
-            <div class="cart-bar__content" id="cart-bar__content">
-                <div class="cart-bar__cart-items">
-                    <p v-if="!cartItems.length">Корзина пуста</p>
-                    <cart-item v-for="item of cartItems" :key="item.product_id" :cart-item="item" @decreaseCartItem="decreaseCartItem" @increaseCartItem="increaseCartItem" @removeCartItem="removeCartItem"></cart-item>
-                </div>
+        <div class="cart-bar__content">
+            <div class="cart-bar__cart-items">
+                <p v-if="!cartItems.length">The shopping cart is empty</p>
+                <cart-item v-for="item of cartItems" :key="item.product_id" :cart-item="item" @decreaseCartItem="decreaseCartItem" @increaseCartItem="increaseCartItem" @removeCartItem="removeCartItem"></cart-item>
             </div>
-        </div> 
+            <div class="cart-bar__cart-total" v-if="cartItems.length">
+                <span class="cart-total__title">Total: </span>
+                <span class="cart-total__price"><!--{{cartCount}} / -->{{cartTotal}}$</span>
+            </div>
+        </div>
         `
 });
-
 Vue.component('cart-item', {
     props: ['cartItem'],
     template: `

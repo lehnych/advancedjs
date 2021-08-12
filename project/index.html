@@ -23,8 +23,8 @@
 								<search ref="search"></search>
 							</div>
 							<div class="basket">
-								<a href="#" title="My Basket" @click="showCart = !showCart">
-								<div class="basket__count">0</div><i class="icon__cart" id="cart-bar__toggle"></i>
+								<a href="#" title="My Basket" @click="toggle">
+									<div class="basket__count">0</div><i class="icon__cart" id="cart-bar__toggle"></i>
 								</a>
 							</div>
 						</div>
@@ -44,8 +44,12 @@
 			</div>
 		</main>
 
-		<cart ref="cart"></cart>
-
+		<div class="cart-bar" :show="isOpen" :class="{active: isOpen}">
+			<div class="cart-bar__header">
+				<span>Cart</span><i class="icon__times" @click="toggle"></i>
+			</div>
+			<cart ref="cart"></cart>
+		</div>
 	</div>
 </div>
 <script src="js/vue.js"></script>
