@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"></html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,46 +9,54 @@
 </head>
 <body>
 
-<div class="page__wrapper">
+<div id="app">
+	<div class="page__wrapper">
 
-	<header>
 		<header>
-			<div class="container">
-				<div class="header__wrapper">
-					<div class="header__col">
-					</div>
-					<div class="header__col">
-						<div class="basket"><a href="#" title="My Basket">
-							<div class="basket__count">0</div><i class="icon__cart" id="cart-bar__toggle"></i></a>
+			<header>
+				<div class="container">
+					<div class="header__wrapper">
+						<div class="header__col">
+						</div>
+						<div class="header__col">
+							<div class="search">
+								<search ref="search"></search>
+							</div>
+							<div class="basket">
+								<a href="#" title="My Basket" @click="toggle">
+									<div class="basket__count">0</div><i class="icon__cart" id="cart-bar__toggle"></i>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</header>
 		</header>
-	</header>
 
-	<main>
-		<div class="main__wrapper container">
-			<section class="product-grid mode--grid row">
-				<div class="product-grid__wrapper">
+		<main>
+			<div class="main__wrapper container">
 
-				</div>
-			</section>
-		</div>
-	</main>
+				<error ref="error"></error>
 
-	<div class="cart-bar" id="cart-bar">
-		<div class="cart-bar__header" id="cart-bar__header"><span>Cart</span><i class="icon__times"></i></div>
-		<div class="cart-bar__content" id="cart-bar__content">
-			<div class="cart-bar__cart-items"></div>
-			<div class="cart-bar__cart-total">
-				<span class="cart-total__title">Total</span>
-				<span class="cart-total__price">$0</span>
+				<section class="product-grid mode--grid row">
+					<products ref="products"></products>
+				</section>
 			</div>
+		</main>
+
+		<div class="cart-bar" :show="isOpen" :class="{active: isOpen}">
+			<div class="cart-bar__header">
+				<span>Cart</span><i class="icon__times" @click="toggle"></i>
+			</div>
+			<cart ref="cart"></cart>
 		</div>
 	</div>
-
-	<script src="js/main.js"></script>
 </div>
+<script src="js/vue.js"></script>
+<script src="js/CartComp.js"></script>
+<script src="js/ProducComp.js"></script>
+<script src="js/ProducSearch.js"></script>
+<script src="js/ErrorComp.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

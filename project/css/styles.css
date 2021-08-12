@@ -2,10 +2,45 @@
 
 
 /* Temp CSS */
-.cart-bar {
-	right: 0;
+.icon--btn {
+	cursor: pointer;
 }
 
+.search__form .form-group {
+	margin-bottom: 0;
+}
+.search__form .form-group [class^=icon__],
+.search__form .form-group [class*=" icon__"] {
+	color: #222;
+}
+
+@media(max-width:567.98px){
+	header .header__col .basket {
+		display:inherit;
+	}
+}
+
+/* Alert */
+.alert {
+	margin-bottom: 45px;
+	padding: 15px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+.alert.alert--danger {
+	background: #f16d7f;
+	color: #ffffff;
+}
+.alert.alert--danger p {
+	margin-bottom: 0;
+}
+.alert.alert--danger .icon--btn {
+	margin: -15px -15px -15px 30px;
+	padding: 15px;
+}
+
+/* Cart */
 .cart-bar__cart-item {
 	margin-bottom: 0;
 }

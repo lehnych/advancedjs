@@ -1,18 +1,18 @@
 {
-  "cartTotalPrice": 8100,
-  "cartTotalItems": 9,
+  "cartTotalPrice": 1100,
+  "cartTotalItems": 2,
   "contents": [
     {
       "product_id": 1,
       "product_img": "img/product/product-m-01-thumb.jpg",
-      "product_name": "Notebook",
+      "product_name": "Men's Unlined Bomber Jacket",
       "product_price": 1000,
-      "product_quantity": 8
+      "product_quantity": 1
     },
     {
       "product_id": 2,
       "product_img": "img/product/product-m-02-thumb.jpg",
-      "product_name": "Mouse",
+      "product_name": "Aurora Bomber Jacket",
       "product_price": 100,
       "product_quantity": 1
     }
