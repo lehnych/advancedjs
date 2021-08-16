@@ -1,7 +1,6 @@
 Vue.component('cart', {
     data(){
       return {
-          cartUrl: '/getBasket.json',
           cartItems: [],
       }
     },
@@ -15,65 +14,49 @@ Vue.component('cart', {
     },
     methods: {
         addProduct(product) {
-            this.$parent.getJson(`${API}/addToBasket.json`)
+            let find = this.cartItems.find(el => el.product_id === product.product_id);
+            if(find){
+                this.$parent.putJson(`/api/cart/${find.product_id}`, {product_quantity: 1});
+                find.quantity++;
+            } else {
+                let prod = Object.assign({product_quantity: 1}, product);
+                this.$parent.postJson('/api/cart', prod)
+                    .then(data => {
+                        if (data.result === 1) {
+                            this.cartItems.push(prod);
+                        }
+                    });
+            }
+        },
+        increaseCartItem(item) {
+            this.$parent.putJson(`/api/cart/${item.product_id}`, {product_quantity: +1})
                 .then(data => {
                     if (data.result === 1) {
-                        let find = this.cartItems.find(el => el.product_id === product.product_id);
-                        if (find) {
-                            find.product_quantity++;
-                        } else {
-                            let prod = Object.assign({product_quantity: 1}, product);
-                            this.cartItems.push(prod)
-                        }
-                    } else {
-                        alert('Error');
+                        item.product_quantity++;
                     }
-                })
+                });
         },
-
-        increaseCartItem(product) {
-            this.$parent.getJson(`${API}/addToBasket.json`)
-                .then(data => {
-                    if(data.result === 1) {
-                        let find = this.cartItems.find(el => el.product_id === product.product_id);
-                        if(find){
-                            find.product_quantity++;
+        decreaseCartItem(item) {
+            if (item.product_quantity > 1) {
+                this.$parent.putJson(`/api/cart/${item.product_id}`, {product_quantity: -1})
+                    .then(data => {
+                        if (data.result === 1) {
+                            item.product_quantity--;
                         }
-                    } else {
-                        alert('Error');
-                    }
-                })
+                    });
+            }
         },
-
-        decreaseCartItem(product) {
-            this.$parent.getJson(`${API}/deleteFromBasket.json`)
-                .then(data => {
-                    if(data.result === 1) {
-                        let find = this.cartItems.find(el => el.product_id === product.product_id);
-                        if(find.product_quantity > 1) {
-                            find.product_quantity--;
-                        }
-                    } else {
-                        alert('Error');
-                    }
-                })
-        },
-
         removeCartItem(item) {
-            this.$parent.getJson(`${API}/deleteFromBasket.json`)
+            this.$parent.deleteJson(`/api/cart/${item.product_id}`)
                 .then(data => {
-                    if(data.result === 1) {
-                        if(item.quantity>1){
-                            item.quantity--;
-                        } else {
-                            this.cartItems.splice(this.cartItems.indexOf(item), 1)
-                        }
+                    if (data.result === 1) {
+                        this.cartItems.splice(this.cartItems.indexOf(item), 1);
                     }
-                })
-        }
+                });
+        },
     },
     mounted(){
-        this.$parent.getJson(`${API + this.cartUrl}`)
+        this.$parent.getJson('/api/cart')
             .then(data => {
                 for(let el of data.contents){
                     this.cartItems.push(el);
@@ -84,7 +67,7 @@ Vue.component('cart', {
         <div class="cart-bar__content">
             <div class="cart-bar__cart-items">
                 <p v-if="!cartItems.length">The shopping cart is empty</p>
-                <cart-item v-for="item of cartItems" :key="item.product_id" :cart-item="item" @decreaseCartItem="decreaseCartItem" @increaseCartItem="increaseCartItem" @removeCartItem="removeCartItem"></cart-item>
+                <cart-item v-for="item of cartItems" :key="item.product_id" :cart-item="item" @increaseCartItem="increaseCartItem" @decreaseCartItem="decreaseCartItem" @removeCartItem="removeCartItem"></cart-item>
             </div>
             <div class="cart-bar__cart-total" v-if="cartItems.length">
                 <span class="cart-total__title">Total: </span>

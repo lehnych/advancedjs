@@ -1,19 +1,18 @@
 Vue.component('products', {
     data(){
         return {
-            catalogUrl: '/catalogData.json',
             products: [],
             filtered: []
         }
     },
     methods: {
-        filter(value){
-            let regexp = new RegExp(value, 'i');
+        filter(userSearch){
+            let regexp = new RegExp(userSearch, 'i');
             this.filtered = this.products.filter(el => regexp.test(el.product_name));
         }
     },
     mounted(){
-        this.$parent.getJson(`${API + this.catalogUrl}`)
+        this.$parent.getJson('/api/products')
             .then(data => {
                 for(let el of data){
                     this.products.push(el);
