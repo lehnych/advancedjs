@@ -1,4 +1,4 @@
-Vue.component('error', {
+const error = {
     data(){
         return {
             text: ''
@@ -15,9 +15,11 @@ Vue.component('error', {
         }
     },
     template: `
-    <div class="alert alert--danger" role="alert" v-if="isVisible">
-        <p>{{ text }}</p>
-        <i class="icon__times icon--btn" @click="setError('')"></i>
-    </div>
+        <div class="alert alert--danger" role="alert" v-if="isVisible">
+            <p>{{ text }}</p>
+            <i class="icon__times icon--btn" @click="setError('')"></i>
+        </div>
     `
-});
+};
+
+export default error;

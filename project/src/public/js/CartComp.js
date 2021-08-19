@@ -1,8 +1,35 @@
-Vue.component('cart', {
+const cartItem = {
+    props: ['cartItem'],
+    template: `
+        <div class="cart-bar__cart-item">
+            <div class="cart-bar__cart-item__img">
+                <img class="img--fluid" :alt="cartItem.product_name" :src="cartItem.product_img">
+            </div>    
+            <div class="cart-bar__cart-item__infos">
+                <h5 class="cart-bar__cart-item__title">{{cartItem.product_name}}</h5>
+                <div>Price: <span class="cart-bar__cart-item__single-price">{{cartItem.product_price}}$</span></div>
+                <div class="cart-bar__cart-item__quantity">Quantity:
+                    <i class="icon__minus icon--btn" @click="$emit('decreaseCartItem', cartItem)"></i>
+                    <span class="cart-bar__cart-item__quantity-input">{{cartItem.product_quantity}}</span>
+                    <i class="icon__plus icon--btn" @click="$emit('increaseCartItem', cartItem)"></i>
+                </div>
+            </div>
+            <div class="cart-bar__cart-item__delete">
+                <i class="icon__times icon--btn" @click="$emit('removeCartItem', cartItem)"></i>
+            </div>
+            <div class="cart-bar__cart-item__price">
+                {{cartItem.product_quantity * cartItem.product_price}}$
+            </div>
+        </div>
+    `
+};
+
+const cart = {
+    components: { cartItem },
     data(){
-      return {
-          cartItems: [],
-      }
+        return {
+            cartItems: [],
+        }
     },
     computed: {
         cartCount() {
@@ -75,29 +102,6 @@ Vue.component('cart', {
             </div>
         </div>
         `
-});
-Vue.component('cart-item', {
-    props: ['cartItem'],
-    template: `
-        <div class="cart-bar__cart-item">
-            <div class="cart-bar__cart-item__img">
-                <img class="img--fluid" :alt="cartItem.product_name" :src="cartItem.product_img">
-            </div>    
-            <div class="cart-bar__cart-item__infos">
-                <h5 class="cart-bar__cart-item__title">{{cartItem.product_name}}</h5>
-                <div>Price: <span class="cart-bar__cart-item__single-price">{{cartItem.product_price}}$</span></div>
-                <div class="cart-bar__cart-item__quantity">Quantity:
-                    <i class="icon__minus icon--btn" @click="$emit('decreaseCartItem', cartItem)"></i>
-                    <span class="cart-bar__cart-item__quantity-input">{{cartItem.product_quantity}}</span>
-                    <i class="icon__plus icon--btn" @click="$emit('increaseCartItem', cartItem)"></i>
-                </div>
-            </div>
-            <div class="cart-bar__cart-item__delete">
-                <i class="icon__times icon--btn" @click="$emit('removeCartItem', cartItem)"></i>
-            </div>
-            <div class="cart-bar__cart-item__price">
-                {{cartItem.product_quantity * cartItem.product_price}}$
-            </div>
-        </div>
-    `
-});
+};
+
+export default cart;

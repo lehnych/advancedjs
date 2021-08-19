@@ -1,7 +1,18 @@
-const API = 'responses';
+import cart from './CartComp'
+import products from './ProducComp'
+import search from './ProducSearchComp'
+import error from './ErrorComp'
+
+//const API = 'responses';
 
 const app = new Vue({
     el: '#app',
+    components: {
+        cart,
+        products,
+        error,
+        search,
+    },
     data(){
         return {
             isOpen: false,
@@ -12,6 +23,7 @@ const app = new Vue({
             return fetch(url)
                 .then(result => result.json())
                 .catch(error => {
+                    console.log(url)
                     this.$refs.error.setError(error);
                 })
         },
